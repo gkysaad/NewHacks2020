@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vroom! You've Got a Match</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="flashcard.js" type="text/javascrips"></script>
+	<script src = "filewriter.js"></script>
+</head>
+<body>
+	<header>
+		<h1 class="title"> VROOM! YOU'VE GOT A MATCH! </h1>
+	</header>
+	<br><br><br>
+	<div class="filter">
+		<form class="filter" id="filterForm" action ="script.js">
+			<label for="year"> <b>Year:</b></label>
+			<input type="text" id="year" name="year"><br><br>
+			<label for="make"> <b>Make:</b></label>
+			<input type="text" id="make" name="make"><br><br>
+			<label for="mileage"> <b>Mileage Limit:</b></label>
+			<input type="text" id="mileage" name="mileage"><br><br>
+			<label for="price"> <b>Price Limit:</b></label>
+			<input type="text" id="price" name="price"><br><br><br>
+			<button type="submit">Find Car</button>
+		</form>
+
+			<script>
+			var endText = " "
+			const myForm = document.getElementById('filterForm');
+			myForm.addEventListener('submit', async function(e) {
+				e.preventDefault();
+				const formData = new FormData(this); //this refers to the form above
+				const searchParams = new URLSearchParams();
+
+				
+				for (const pair of formData) {
+					searchParams.append(pair[0], pair[1]);
+				}
+
+				var bodyStuff = new FormData();
+				bodyStuff.append("api_key", "tQY-a5ytQULq");
+				bodyStuff.append("start_url", "https://www.kijijiautos.ca/");
+				bodyStuff.append("send_email", "1");
+				bodyStuff.append("start_value_override","{\"data\":[{\"make\":\"" + searchParams.getAll("make")[0] + "\",\"model\":\" \",\"year\":\"" + searchParams.getAll("year")[0] + "\",\"mileage\":\"" + searchParams.getAll("mileage")[0] + "\",\"price\":\"" + searchParams.getAll("price")[0] + "\"}]}")
+
+				var requestOptions = {
+										method: 'POST',
+										body: bodyStuff,
+										redirect: 'follow'
+										};
+
+				fetch("https://www.parsehub.com/api/v2/projects/ttPuhXkthMpz/run", requestOptions)
+				.then(response => response.text())
+				.then(result => {
+					let obj = JSON.parse(result)
+					endText = JSON.stringify(obj.run_token);
+					console.log(endText)
+				})
+				.catch(error => console.log('error', error));
+
+				await new Promise(r => setTimeout(r, 60000));
+				
+				console.log(endText)
+				fetch("https://www.parsehub.com/api/v2/runs/" + endText.substring(1, 13) +  "/data?api_key=tQY-a5ytQULq")
+				.then(function (response) {
+				return response.text();
+				}).then(function (text) {
+					download(text, "results.txt", "plain/text");
+					console.log(text);
+					var datatext = text;
+					window.location.href="flashcard.html";
+					//nae(datatext);
+				}).catch(function (error) {
+				console.error(error);
+				})
+			})
+
+
+
+			/*var myHeaders = new Headers();
+			myHeaders.append("User-Agent", "PostmanRuntime/7.22.0"); */
+			//myHeaders.append("Accept", "*/*");
+			//myHeaders.append("Cache-Control", "no-cache");
+			/* myHeaders.append("Postman-Token", "55421f47-e803-4e6a-85f3-abf410923ae1");
+			myHeaders.append("Host", "www.parsehub.com");
+			myHeaders.append("Content-Type", "multipart/form-data; boundary=--------------------------180401260797681213179167");
+			myHeaders.append("Accept-Encoding", "gzip, deflate, br");
+			myHeaders.append("Content-Length", "638");
+			myHeaders.append("Connection", "keep-alive");
+
+			var formdata = new FormData();
+			formdata.append("api_key", "tQY-a5ytQULq");
+			formdata.append("start_url", "https://www.kijijiautos.ca/");
+			formdata.append("send_email", "1");
+			formdata.append("start_value_override", "{\"data\":[\n{\"make\": \"" + make + "\", \n\"model\":\"\", \n\"year\":\"" + year + "\",\n\"mileage\":\"" + mil + "\",\n\"price\":\"" + prc + "\"}]\n}");
+
+			var requestOptions = {
+			method: 'POST',
+			//headers: myHeaders,
+			mode: 'no-cors',
+			body: formdata,
+			redirect: 'follow'
+			};
+
+			await fetch("https://www.parsehub.com/api/v2/projects/ttPuhXkthMpz/run", requestOptions)
+			.then(response => response.text())
+			.then(result => console.log(result))
+			.catch(error => console.log('error', error));
+			
+		}
+			
+			//
+
+			var requestOptions = {
+  				method: 'GET',
+  				mode: 'no-cors',
+  				redirect: 'follow'
+			};
+
+			fetch("https://www.parsehub.com/api/v2/runs/" + getInputValue()["run_key"] + "/data?api_key=tQY-a5ytQULq", requestOptions)
+  			.then(response => response.text())
+  			.then(result => console.log(result))
+  			.catch(error => console.log('error', error)); */
+			</script>
+
+		</form>	
+		<img src="background.jpg">
+</body>
+</html>
