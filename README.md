@@ -1,5 +1,7 @@
 # Spark Plug
 
+To test it live, visit: https://spark-plug.herokuapp.com/
+
 We all went into NewHacks2020 with very specific goals in mind: all of them were to do with learning something new. For Sameer, it was to further his grasp on front end development. For Zaid; it was to learn about APIs, JavaScript, and React.js. We were all extremely new to the hackathon scene, and we're very proud of our project, Spark Plug, or as we like to call it (colloquially), the car matchmaking program!
 
 Our planning process was long and tiring, but crucial to the development of the most suitable application to push our skills to the limit given the time restriction without exceeding it. We took most of Saturday cycling between a couple different ideas we had, mapping out the pros and cons, and flow-charting the different difficulties we may encounter.
