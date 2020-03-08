@@ -6,6 +6,8 @@
 
 body {
 	background-size: cover;
+	height:100%;
+	width: 100%;
 	background-image: url(background.jpg);
 }
 .title {
@@ -17,11 +19,22 @@ body {
 	border-style: solid;
 	padding: 0;
 	font-size: 48px;
+	text-align: center;
 }
 
 .filter{
 	
 	font-size: 18px;
-	position: absolute;
 	z-index: 10;
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
 }
+
+
