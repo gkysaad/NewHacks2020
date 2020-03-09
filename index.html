@@ -12,7 +12,7 @@
 	</header>
 	<br><br><br>
 	<div class="filter">
-		<form class="filter" id="filterForm" action ="script.js">
+		<form id="filterForm" action ="script.js">
 			<label for="year"> <b>Year:</b></label>
 			<input type="text" id="year" name="year"><br><br>
 			<label for="make"> <b>Make:</b></label>
@@ -22,8 +22,16 @@
 			<label for="price"> <b>Price Limit:</b></label>
 			<input type="text" id="price" name="price"><br><br><br>
 			<button type="submit">Find Car</button>
+			
 		</form>
-
+		<br>
+		<span style="background-color: #FFFFF0">
+		Please wait a minute while we retreive the list of available cars. 
+		You will receive a results.txt file when completed!
+		</span>
+		</div>
+		
+			
 			<script>
 			var endText = " "
 			const myForm = document.getElementById('filterForm');
